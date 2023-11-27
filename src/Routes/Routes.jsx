@@ -7,6 +7,10 @@ import DashboardLayout from "./DashboardLayout/DashboardLayout";
 import SurveyCreation from "../Pages/Dashboard/SurveyCreation/SurveyCreation";
 import Users from "../Pages/Dashboard/Users/Users";
 import Pricing from "../Pages/Pricing/Pricing";
+import SurveyStatus from "../Pages/Dashboard/SurveyStatus/SurveyStatus";
+import FeedBack from "../Pages/Dashboard/SurveyStatus/FeedBack";
+import Surveys from "../Pages/Surveys/Surveys";
+import SurveyDetails from "../Pages/Surveys/SurveyDetails";
 
 
 
@@ -30,6 +34,15 @@ export const router = createBrowserRouter([
             {
                 path: '/pricing',
                 element: <Pricing></Pricing>
+            },
+            {
+                path: '/surveys',
+                element: <Surveys></Surveys>
+            },
+            {
+                path: 'surveyDetails/:id',
+                element: <SurveyDetails></SurveyDetails>,
+                loader: ({params}) => fetch(`http://localhost:5000/surveyCreation/${params.id}`)
             }
             
         ]
@@ -45,6 +58,15 @@ export const router = createBrowserRouter([
     {
         path: 'users',
         element: <Users></Users>
+    },
+    {
+        path: 'surveyStatus',
+        element: <SurveyStatus></SurveyStatus>
+    },
+    {
+        path: 'feedback/:id',
+        element: <FeedBack></FeedBack>,
+        loader: ({params}) => fetch(`http://localhost:5000/surveyCreation/${params.id}`)
     }
    ]
     }

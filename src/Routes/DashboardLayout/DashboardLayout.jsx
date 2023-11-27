@@ -21,17 +21,18 @@ const DashboardLayout = () => {
         isAdmin ?
         
         <>
-      <li><FaHome></FaHome> <Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-green-500 to-lime-500 text-white mb-5"  to="surveyCreation">Admin Home</Link></li>
-      <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-green-500 to-lime-500 text-white mb-5"  to="users">Users</Link></li>
+      <li><FaHome></FaHome> <Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-amber-500 to-lime-500 text-black mb-5"  to="surveyCreation">Admin Home</Link></li>
+      <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-amber-500 to-lime-500 text-black mb-5"  to="surveyStatus">Survey Status</Link></li>
+      <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-amber-500 to-lime-500 text-black mb-5"  to="users">Users</Link></li>
       <hr />
-      <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-green-500 to-lime-500 text-white mb-5 mt-5"  to="/">Back To Home</Link></li>
+      <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-amber-500 to-lime-500 text-black mb-5 mt-5"  to="/">Back To Home</Link></li>
         </>
         :
         <>
-          <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-green-500 to-lime-500 text-white mb-5"  to="surveyCreation">My Survey</Link></li>
-      <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-green-500 to-lime-500 text-white mb-5"  to="surveyCreation">Survey Creation</Link></li>
+          <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-amber-500 to-lime-500 text-black mb-5"  to="surveyCreation">My Survey</Link></li>
+      <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-amber-500 to-lime-500 text-black mb-5"  to="surveyCreation">Survey Creation</Link></li>
       <hr />
-      <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-green-500 to-lime-500 text-white mb-5 mt-5"  to="/">Back To Home</Link></li>
+      <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-amber-500 to-lime-500 text-black mb-5 mt-5"  to="/">Back To Home</Link></li>
         </>
       }
     

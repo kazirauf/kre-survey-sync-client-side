@@ -1,16 +1,20 @@
-import { useState } from "react";
+
+import Swal from "sweetalert2";
 import useAuth from "../../../hook/useAuth";
+import useAxiosSecure from "../../../hook/useAxiosSecure";
 
 
 
-const SurveyCreation = () => {
+const SurveyCreation  =  () => {
     const {user} = useAuth()
-    const [options, setOptions] = useState({})
- 
+    const axiosSecure = useAxiosSecure()
     
 const addSurvey = (event) => {
     let like = 0;
     let disLike = 0;
+    let no = 0;
+    let yes = 0;
+    const timeStamp = new Date()
     event.preventDefault()
     const form = event.target;
     const survey_title = form.survey_title.value;
@@ -18,8 +22,22 @@ const addSurvey = (event) => {
     const survey_category = form.survey_category.value;
     const user_email = user?.email;
    
-    const survey = {survey_title, survey_description, survey_category, user_email, options, like, disLike}
-    console.log(survey);
+    const survey = {survey_title, timeStamp, survey_description, survey_category, user_email, like, disLike, yes, no}
+
+
+   axiosSecure.post('/surveyCreation', survey)
+   .then(res => {
+    if(res.data.insertedId) {
+      Swal.fire({
+        title: 'success!',
+        text: 'survey added successfully',
+        icon: 'success',
+        confirmButtonText: 'Done'
+      })
+    }
+    console.log(res.data);
+   })
+ 
 }
 
 
