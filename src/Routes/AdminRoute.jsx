@@ -1,14 +1,14 @@
+/* eslint-disable react/prop-types */
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../hook/useAuth";
 import useAdmin from "../hook/useAdmin";
 
 
-
-const AdminRoute = (children) => {
+const AdminRoute = ({children}) => {
     const [user, loading] = useAuth(); 
     const [isAdmin, isAdminLoading] = useAdmin();
     const location = useLocation();
-
+console.log("isAdmin", isAdmin)
     if(loading || isAdminLoading){
         return <progress className="progress w-56"></progress>
     }

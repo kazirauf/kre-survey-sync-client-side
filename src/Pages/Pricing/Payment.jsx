@@ -4,6 +4,8 @@ import useAxiosSecure from "../../hook/useAxiosSecure";
 import useAuth from "../../hook/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 const Payment = () => {
@@ -15,10 +17,11 @@ const Payment = () => {
     const [selectedUserId, setSelectedUserId] = useState(null);
     console.log(selectedUserId);
     const {user} = useAuth()
-
+const navigate = useNavigate()
 
    
-
+   toast.error(error)
+   
       useEffect(() => {
         const totalPrice = {
           price: 10
@@ -32,21 +35,24 @@ const Payment = () => {
       
 
 
-
-      const { data: paring = [] } = useQuery({
-        queryKey: ['paring'],
+      const { data: myRole = [] } = useQuery({
+        queryKey: ["myRole", user?.email],
         queryFn: async () => {
-          const res = await axiosSecure.get('/paring');
-          return res.data;
+          try {
+            if (user && user.email) {
+              const res = await axiosSecure.get(`/myRole?email=${user?.email}`);
+              return res.data;
+            } else {
+              return null;
+            }
+          } catch (error) {
+            console.error("Error fetching myRole:", error);
+            throw error;
+          }
         },
       });
     
-      useEffect(() => {
-        const userData = paring.find((u) => u.name === user?.displayName);
-        if (userData) {
-          setSelectedUserId(userData._id);
-        }
-      }, [paring, user]);
+ 
     
       
     const handleSubmit = async (event) => {
@@ -108,6 +114,7 @@ const Payment = () => {
                         timer: 1500,
                       });
                     }
+                    navigate("/")
                   });
             
             }
@@ -123,18 +130,19 @@ const Payment = () => {
             
             <h1 className="text-2xl text-center">You Want To A Pro User Pay: $10</h1>
               <form onSubmit={handleSubmit}>
-                {
-                    paring?.map(u => 
-                       <div  key={u._id}>
-                      {
-                        u?.name === user?.displayName &&
-                        <>
-                        <h1 className="text-center text-5xl text-green-500">Dear {u.name} Get Payment</h1>
-                        </>
-                      }
-                       </div>
-                    )
-                }
+              {
+  Array.isArray(myRole) && myRole.map(u => (
+    <div key={u._id}>
+      {
+        u?.name === user?.displayName &&
+        <>
+          <h1 className="text-center text-5xl text-green-500">Dear {u?.name} Get Payment</h1>
+        </>
+      }
+    </div>
+  ))
+}
+
 
 <CardElement
     className="lg:mx-[500px] mt-20 border-4 border-green-500 p-10"

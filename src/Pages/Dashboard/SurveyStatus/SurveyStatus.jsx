@@ -2,7 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hook/useAxiosSecure";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-
+import Chart from "react-apexcharts";
+import moment from "moment";
 const SurveyStatus = () => {
     const axiosSecure = useAxiosSecure()
  
@@ -53,7 +54,7 @@ const SurveyStatus = () => {
     
     <th>Category & User Email</th>
     <th>----Activities----</th>
-    <th>Option</th>
+    <th><span>Option &</span>  <br /><span> see all details of the survey</span></th>
    
   </tr>
 </thead>
@@ -67,7 +68,10 @@ const SurveyStatus = () => {
           <div className="flex items-center gap-3">
             <div>
               <div className="font-bold text-sm">{u.survey_title}</div>
-              <div className="font-bold text-xs">{u.timeStamp}</div>
+              <span className="badge badge-ghost badge-xs">
+  {moment(u.timeStamp).format('MMMM Do YYYY, h:mm:ss a')}
+</span>
+
          
             </div>
           </div>
@@ -92,7 +96,7 @@ const SurveyStatus = () => {
        
       </td>
 
-
+    
      
         <th>
    
@@ -107,7 +111,83 @@ const SurveyStatus = () => {
           <Link to={`/dashboard/feedback/${u._id}`} className="btn btn-sm bg-violet-500 text-white mt-2">Unpublish</Link>
        </>
          }
+         <br />
+         <dialog id="my_modal_3" className="modal">
+                      <div className="modal-box">
+                        <form method="dialog">
+                          {/* if there is a button in form, it will close the modal */}
+                          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                            ✕
+                          </button>
+                        </form>
+                        <h3 className="font-bold text-lg">The Vote</h3>
+                        <p className="py-4">YES: {u.yes}</p>
+                        <p className="py-4">No: {u.no}</p>
 
+                        <div className="max-w-20 w-96 text-black">
+                          <div className="text-black">
+                            <Chart
+                              className="w-full sm:w-auto md:w-auto"
+                              height={800}
+                              type="pie"
+                              series={[u.no, u.yes]}
+                              options={{
+                                labels: ["No", "Yes"],
+                                legend: { position: "bottom" },
+                                colors: ["#FF444A", "#00C49F"],
+                              }}
+                            />
+                          </div>
+
+                          <div className="lg:mt-20 shadow-xl  bg-base-100 ">
+          <div className="border-2 border-red-500 p-5 rounded-lg">
+            <h2 className="text-center text-xl font-bold">Report</h2>
+            
+            {u?.allUserReport?.map((report) => (
+              <div key={_id}>
+                {" "}
+                <div className="chat chat-start">
+  <div className="chat-image avatar">
+    <div className="w-10 rounded-full">
+      <img alt="Tailwind CSS chat bubble component" src={report?.userImage} />
+      <span>{report?.userEmail}</span>
+    </div>
+  </div>
+  <div className="chat-bubble">{report?.report}</div>
+</div>
+
+              </div>
+            ))}
+          </div>
+          <div className="border-2 border-green-500 mt-5 p-5 rounded-lg">
+            <h2 className="text-center text-xl font-bold">Pro User Comment</h2>
+            {u?.userInfo?.map((report) => (
+              <div key={u._id}>
+            
+                <div className="chat chat-start">
+  <div className="chat-image avatar">
+    <div className="w-10 rounded-full">
+      <img alt="Tailwind CSS chat bubble component" src={report?.userImage} />
+      <span>{report?.userEmail}</span>
+    </div>
+  </div>
+  <div className="chat-bubble bg-sky-500">{report?.comment}</div>
+</div>
+              </div>
+            ))}
+          </div>
+        </div>
+                        </div>
+                      </div>
+                    </dialog>
+ <button
+                      className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-amber-500 to-lime-500 text-black mb-5 mt-5"
+                      onClick={() =>
+                        document.getElementById("my_modal_3").showModal()
+                      }
+                    >
+                      See All Details
+                    </button>
         </th>
       </tr>
       )

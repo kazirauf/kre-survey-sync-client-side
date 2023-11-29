@@ -11,6 +11,14 @@ import SurveyStatus from "../Pages/Dashboard/SurveyStatus/SurveyStatus";
 import FeedBack from "../Pages/Dashboard/SurveyStatus/FeedBack";
 import Surveys from "../Pages/Surveys/Surveys";
 import SurveyDetails from "../Pages/Surveys/SurveyDetails";
+import UsersPayment from "../Pages/Dashboard/UsersPayment/UsersPayment";
+import MySurvey from "../Pages/Dashboard/MySurvey/MySurvey";
+
+import UpdateSurvey from "../Pages/Dashboard/MySurvey/UpdateSurvey";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import About from "../Pages/About/About";
+
 
 
 
@@ -40,10 +48,14 @@ export const router = createBrowserRouter([
                 element: <Surveys></Surveys>
             },
             {
-                path: 'surveyDetails/:id',
+                path: '/surveyDetails/:id',
                 element: <SurveyDetails></SurveyDetails>,
-                loader: ({params}) => fetch(`http://localhost:5000/surveyCreation/${params.id}`)
+            },
+            {
+                path: '/about',
+                element: <About></About>,
             }
+        
             
         ]
     },
@@ -53,7 +65,7 @@ export const router = createBrowserRouter([
    children: [ 
     {
         path: 'surveyCreation',
-        element : <SurveyCreation></SurveyCreation>
+        element : <PrivateRoute><SurveyCreation></SurveyCreation></PrivateRoute>
     },
     {
         path: 'users',
@@ -61,13 +73,28 @@ export const router = createBrowserRouter([
     },
     {
         path: 'surveyStatus',
-        element: <SurveyStatus></SurveyStatus>
+        element:  <SurveyStatus></SurveyStatus>
     },
     {
         path: 'feedback/:id',
         element: <FeedBack></FeedBack>,
-        loader: ({params}) => fetch(`http://localhost:5000/surveyCreation/${params.id}`)
+        loader: ({params}) => fetch(`https://kre-survey-server-side.vercel.app/surveyCreation/${params.id}`)
+    },
+    {
+        path: 'usersPayment',
+        element: <UsersPayment></UsersPayment>
+       
+    },
+    {
+        path: 'mySurvey',
+        element: <PrivateRoute><MySurvey></MySurvey></PrivateRoute>
+    },
+    {
+        path: 'update/:id',
+        element:  <UpdateSurvey></UpdateSurvey>,
+        loader: ({params}) => fetch(`https://kre-survey-server-side.vercel.app/surveyCreation/${params.id}`)
     }
+   
    ]
     }
   

@@ -1,13 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hook/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 
 const Users = () => {
     const axiosSecure = useAxiosSecure()
+    const [userData, setuserData] = useState([]);
+    const [reloaded, setReloaded] = useState(false);
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
+          setReloaded(true);
           const res = await axiosSecure.get('/users');
           return res.data;
         },
@@ -73,9 +77,31 @@ const Users = () => {
         });
       };
       
+      const handleCategory = (event) => {
+        event.preventDefault();
+        const form = event.target.value;
+        console.log(form);
+        const data = users.filter((s) => s.role === form);
+        setuserData(data);
+        setReloaded(false);
+      }
+
     return (
         <div className="mt-20">
             <h1 className="text-4xl  text-center mb-10">All Users</h1>
+         <div className="flex justify-center">
+         <select
+        onChange={handleCategory}
+        className="w-full px-4 mb-10 py-2 border-2 rounded-xl border-lime-500 focus:outline-none focus:border-lime-400 focus:bg-white"
+        name="survey_category"
+      >
+        <option value="admin">admin</option>
+        <option value="pro user">pro user</option>
+        <option value="surveyor">surveyor</option>
+        <option value="user">user</option>
+        
+      </select>
+         </div>
             <div className="overflow-x-auto">
   <table className="table">
     {/* head */}
@@ -94,48 +120,92 @@ const Users = () => {
     <tbody>
       {/* row 1 */}
       {
-        users.map(u =>  <tr key={u._id} className="">
+       reloaded ?
+       users.map(u =>  <tr key={u._id} className="">
         
-            <td>
-              <div className="flex items-center gap-3">
-                <div className="avatar">
-                  <div className="mask mask-squircle w-12 h-12">
-                    <img src={u.image} alt="Avatar Tailwind CSS Component" />
-                  </div>
-                </div>
-                <div>
-                  <div className="font-bold">{u.name}</div>
-                
-                </div>
-              </div>
-            </td>
-            <td>
+       <td>
+         <div className="flex items-center gap-3">
+           <div className="avatar">
+             <div className="mask mask-squircle w-12 h-12">
+               <img src={u.image} alt="Avatar Tailwind CSS Component" />
+             </div>
+           </div>
+           <div>
+             <div className="font-bold">{u.name}</div>
+           
+           </div>
+         </div>
+       </td>
+       <td>
+
+         <span className="badge badge-ghost badge-sm"> {u.email}</span>
+       </td>
+       <td>
+
+         <h2 className="text-base font-bold"> {u.role}</h2>
+       </td>
+     <td className="ml-20">
+     {
+       u.role === 'admin' ?
+       <button onClick={() => handleAdmin(u)} className="hidden btn btn-sm  px-2 font-bold mt-6 bg-yellow-500 mr-2 text-white">Admin</button>
+       :
+       <button onClick={() => handleAdmin(u)} className="btn btn-sm  px-2 font-bold mt-6 bg-yellow-500 mr-2 text-white">Admin</button>
+      }
+       {
+           u.role === 'surveyor' ?
+           <button className="btn btn-sm mt-6 px-2 bg-green-500 text-white hidden">Surveyor</button>
+           :
+           <button onClick={() => handleSurveyor(u)} className="btn btn-sm mt-6 px-2 bg-green-500 text-white">Surveyor</button>
+       }
+     </td>
     
-              <span className="badge badge-ghost badge-sm"> {u.email}</span>
-            </td>
-            <td>
-    
-              <h2 className="text-base font-bold"> {u.role}</h2>
-            </td>
-          <td className="ml-20">
-          {
-            u.role === 'admin' ?
-            <button onClick={() => handleAdmin(u)} className="hidden btn btn-sm  px-2 font-bold mt-6 bg-yellow-500 mr-2 text-white">Admin</button>
-            :
-            <button onClick={() => handleAdmin(u)} className="btn btn-sm  px-2 font-bold mt-6 bg-yellow-500 mr-2 text-white">Admin</button>
-           }
-            {
-                u.role === 'surveyor' ?
-                <button className="btn btn-sm mt-6 px-2 bg-green-500 text-white hidden">Surveyor</button>
-                :
-                <button onClick={() => handleSurveyor(u)} className="btn btn-sm mt-6 px-2 bg-green-500 text-white">Surveyor</button>
-            }
-          </td>
+       <th>
+         <button onClick={() =>  handleDeleteUser(u)} className="btn btn-sm bg-red-500 text-white">Delete</button>
+       </th>
+     </tr>)
+     :
+     userData.map(u =>  <tr key={u._id} className="">
+        
+     <td>
+       <div className="flex items-center gap-3">
+         <div className="avatar">
+           <div className="mask mask-squircle w-12 h-12">
+             <img src={u.image} alt="Avatar Tailwind CSS Component" />
+           </div>
+         </div>
+         <div>
+           <div className="font-bold">{u.name}</div>
          
-            <th>
-              <button onClick={() =>  handleDeleteUser(u)} className="btn btn-sm bg-red-500 text-white">Delete</button>
-            </th>
-          </tr>)
+         </div>
+       </div>
+     </td>
+     <td>
+
+       <span className="badge badge-ghost badge-sm"> {u.email}</span>
+     </td>
+     <td>
+
+       <h2 className="text-base font-bold"> {u.role}</h2>
+     </td>
+   <td className="ml-20">
+   {
+     u.role === 'admin' ?
+     <button onClick={() => handleAdmin(u)} className="hidden btn btn-sm  px-2 font-bold mt-6 bg-yellow-500 mr-2 text-white">Admin</button>
+     :
+     <button onClick={() => handleAdmin(u)} className="btn btn-sm  px-2 font-bold mt-6 bg-yellow-500 mr-2 text-white">Admin</button>
+    }
+     {
+         u.role === 'surveyor' ?
+         <button className="btn btn-sm mt-6 px-2 bg-green-500 text-white hidden">Surveyor</button>
+         :
+         <button onClick={() => handleSurveyor(u)} className="btn btn-sm mt-6 px-2 bg-green-500 text-white">Surveyor</button>
+     }
+   </td>
+  
+     <th>
+       <button onClick={() =>  handleDeleteUser(u)} className="btn btn-sm bg-red-500 text-white">Delete</button>
+     </th>
+   </tr>)
       }
   
 

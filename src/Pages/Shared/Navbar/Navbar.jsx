@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import useAuth from "../../../hook/useAuth";
 
 
+
 const Navbar = () => {
     const {user, logOut} = useAuth()
 
@@ -13,8 +14,14 @@ const Navbar = () => {
     const Navlink = <>
     <li><NavLink className="text-lg font-bold" to="/">Home</NavLink></li>
     <li><NavLink className="text-lg font-bold" to="/surveys">Surveys</NavLink></li>
-    <li><NavLink className="text-lg font-bold" to="/pricing">Pricing</NavLink></li>
+    <li><NavLink className="text-lg font-bold" to="/about">About</NavLink></li>
+    <li><NavLink className="text-lg font-bold" to="/pricing">
+      <img className="w-7" src="https://cdn-icons-png.flaticon.com/512/9449/9449675.png" alt="" />
+      Pro
+      </NavLink></li>
     <li><NavLink className="text-lg font-bold" to="/dashboard">Dashboard</NavLink></li>
+   
+   
     </>
       return (
           <div>
@@ -26,9 +33,15 @@ const Navbar = () => {
         </label>
         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
          {Navlink}
+         <NavLink to="/" className="btn btn-ghost ">
+        <img className="w-8" src="https://png.pngtree.com/png-vector/20220625/ourmid/pngtree-clipboard-icon-design-vector-png-image_5335667.png"
+         alt="" />
+         <h2 className="text-sm text-black">KRE Survey Sync</h2>
+  
+      </NavLink>
         </ul>
       </div>
-      <NavLink to="/" className="btn btn-ghost ">
+      <NavLink to="/" className="btn btn-ghost lg:flex hidden">
         <img className="w-16" src="https://png.pngtree.com/png-vector/20220625/ourmid/pngtree-clipboard-icon-design-vector-png-image_5335667.png"
          alt="" />
          <h2 className="text-lg">KRE Survey Sync</h2>

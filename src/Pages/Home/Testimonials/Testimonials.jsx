@@ -1,9 +1,8 @@
 
-
 const Testimonials = () => {
     return (
         <div>
-        <div>
+  <div>
 <h1 className="text-center lg:text-4xl text-green-500 font-bold mt-20">Testimonials</h1>
 <div className="flex justify-center my-20" data-aos="flip-up"  data-aos-duration="2000">
 <div className="carousel w-[900px]">
@@ -82,6 +81,7 @@ const Testimonials = () => {
 </div>
 
 </div>
+
  </div>
     );
 };

@@ -1,21 +1,21 @@
-
-import Swal from "sweetalert2";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../../hook/useAuth";
 import useAxiosSecure from "../../../hook/useAxiosSecure";
-import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
-
-
-const SurveyCreation  =  () => {
+const UpdateSurvey = () => {   
+    const data = useLoaderData()
+    console.log(data);
     const {user} = useAuth()
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
-const addSurvey = (event) => {
+
+const updateSurvey = (event) => {
     let like = 0;
     let disLike = 0;
     let no = 0;
     let yes = 0;
-   
+    const timeStamp = new Date()
     event.preventDefault()
     const form = event.target;
     const survey_title = form.survey_title.value;
@@ -23,52 +23,52 @@ const addSurvey = (event) => {
     const survey_category = form.survey_category.value;
     const user_email = user?.email;
    
-    const survey = {survey_title,  survey_description, survey_category, user_email, like, disLike, yes, no}
+    const survey = {survey_title, timeStamp, survey_description, survey_category, user_email, like, disLike, yes, no}
 
 
-   axiosSecure.post('/surveyCreation', survey)
+   axiosSecure.put(`/surveyCreation/${data._id}`, survey)
    .then(res => {
-    if(res.data.insertedId) {
+    if(res.data.modifiedCount > 0) {
       Swal.fire({
         title: 'success!',
-        text: 'survey added successfully',
+        text: 'survey update successfully',
         icon: 'success',
         confirmButtonText: 'Done'
       })
-      navigate('/dashboard/mySurvey')
-      
+      navigate("/dashboard/mySurvey")
+
     }
     console.log(res.data);
    })
  
 }
 
-
     return (
         <div>
+              <div>
           <div className="hero min-h-screen">
   <div className="hero-content ">
 
     <div className="card shrink-0 w-[1000px] max-w-2xl shadow-2xl bg-base-100">
-      <form onSubmit={addSurvey} className="card-body ">
+      <form onSubmit={updateSurvey} className="card-body ">
         <div className="form-control">
           <label className="label">
             <span className="label-text">Survey Title</span>
           </label>
-          <input type="text" name="survey_title" placeholder="Survey Title" className="input input-bordered" required />
+          <input type="text" defaultValue={data.survey_title} name="survey_title" placeholder="Survey Title" className="input input-bordered" required />
         </div>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Survey Description</span>
           </label>
-          <textarea name="survey_description" className="textarea textarea-success" placeholder="Survey Description"></textarea>
+          <textarea name="survey_description" defaultValue={data.survey_description} className="textarea textarea-success" placeholder="Survey Description"></textarea>
         </div>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Survey Category</span>
           </label>
           <select className="w-full px-4 py-2 border-2 rounded-xl border-lime-500 focus:outline-none focus:border-lime-400 focus:bg-white"
-                  name="survey_category">
+                  name="survey_category" defaultValue={data.survey_category}>
   <option value="Demographics">Demographics</option>
   <option value="Customer Satisfaction">Customer Satisfaction</option>
   <option value="Employee Engagement">Employee Engagement</option>
@@ -93,7 +93,8 @@ const addSurvey = (event) => {
   </div>
 </div>
         </div>
+        </div>
     );
 };
 
-export default SurveyCreation;
+export default UpdateSurvey;

@@ -4,6 +4,7 @@ import useAdmin from "../../hook/useAdmin";
 
 const DashboardLayout = () => {
   const [isAdmin] = useAdmin();
+  console.log(isAdmin)
     return (
         <div>
             <div className="drawer lg:drawer-open">
@@ -21,15 +22,15 @@ const DashboardLayout = () => {
         isAdmin ?
         
         <>
-      <li><FaHome></FaHome> <Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-amber-500 to-lime-500 text-black mb-5"  to="surveyCreation">Admin Home</Link></li>
       <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-amber-500 to-lime-500 text-black mb-5"  to="surveyStatus">Survey Status</Link></li>
       <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-amber-500 to-lime-500 text-black mb-5"  to="users">Users</Link></li>
+      <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-amber-500 to-lime-500 text-black mb-5"  to="usersPayment">User Payments</Link></li>
       <hr />
       <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-amber-500 to-lime-500 text-black mb-5 mt-5"  to="/">Back To Home</Link></li>
         </>
         :
         <>
-          <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-amber-500 to-lime-500 text-black mb-5"  to="surveyCreation">My Survey</Link></li>
+          <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-amber-500 to-lime-500 text-black mb-5"  to="mySurvey">My Survey</Link></li>
       <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-amber-500 to-lime-500 text-black mb-5"  to="surveyCreation">Survey Creation</Link></li>
       <hr />
       <li><Link className="py-2.5 px-5 rounded-md font-bold bg-gradient-to-r from-amber-500 to-lime-500 text-black mb-5 mt-5"  to="/">Back To Home</Link></li>
