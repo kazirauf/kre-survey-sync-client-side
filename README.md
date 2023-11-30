@@ -21,3 +21,7 @@ Features:
 4. Mobile Responsiveness:
 
 5. Advanced Security Measures:
+
+6. fameworks and library: tailwind css, material ui, handless ui, daisy ui 
+
+7. Package : Transtack Query, moment
