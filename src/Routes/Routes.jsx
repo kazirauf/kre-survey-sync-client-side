@@ -19,6 +19,7 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import About from "../Pages/About/About";
 import ContactUs from "../Pages/ContactUs/ContactUs";
+import HelpCenter from "../Pages/HelpCenter/HelpCenter";
 
 
 
@@ -59,6 +60,11 @@ export const router = createBrowserRouter([
             {
                 path: '/contactUs',
                 element: <ContactUs></ContactUs>,
+               
+            },
+            {
+                path: '/helpCenter',
+                element: <HelpCenter></HelpCenter>,
                
             }
         
