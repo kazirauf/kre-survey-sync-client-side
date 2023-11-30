@@ -80,6 +80,8 @@ const addSurvey = (event) => {
   <option value="Event Feedback">Event Feedback</option>
   <option value="Technology Usage">Technology Usage</option>
   <option value="Social Issues">Social Issues</option>
+  <option value="Sports">Sports</option>
+  <option value="Entertainment">Entertainment</option>
   <option value="Travel and Tourism">Travel and Tourism</option>
   <option value="Environmental Awareness">Environmental Awareness</option>
   <option value="Nonprofit and Charity">Nonprofit and Charity</option>
