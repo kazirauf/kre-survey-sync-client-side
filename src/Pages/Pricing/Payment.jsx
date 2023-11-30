@@ -14,13 +14,12 @@ const Payment = () => {
     const [error, setError] = useState()
     const [clientSecret, setClientSecret] = useState('')
     const axiosSecure = useAxiosSecure()
-    const [selectedUserId, setSelectedUserId] = useState(null);
-    console.log(selectedUserId);
+    
     const {user} = useAuth()
 const navigate = useNavigate()
 
    
-   toast.error(error)
+
    
       useEffect(() => {
         const totalPrice = {
@@ -103,7 +102,7 @@ const navigate = useNavigate()
             console.log('payment intent', paymentIntent)
             console.log("price", 10);
             if(paymentIntent.status === "succeeded"){
-                axiosSecure.patch(`/users/proUser/${selectedUserId}`).then((res) => {
+                axiosSecure.patch(`/users/proUser/${myRole._id}`).then((res) => {
                     console.log(res.data);
                     if (res.data.modifiedCount > 0) {
                       Swal.fire({
