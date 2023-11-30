@@ -14,12 +14,14 @@ const Navbar = () => {
     const Navlink = <>
     <li><NavLink className="text-lg font-bold" to="/">Home</NavLink></li>
     <li><NavLink className="text-lg font-bold" to="/surveys">Surveys</NavLink></li>
-    <li><NavLink className="text-lg font-bold" to="/about">About</NavLink></li>
+    
     <li><NavLink className="text-lg font-bold" to="/pricing">
       <img className="w-7" src="https://cdn-icons-png.flaticon.com/512/9449/9449675.png" alt="" />
       Pro
       </NavLink></li>
     <li><NavLink className="text-lg font-bold" to="/dashboard">Dashboard</NavLink></li>
+    <li><NavLink className="text-lg font-bold" to="/about">About</NavLink></li>
+    <li><NavLink className="text-lg font-bold" to="/contactUs">Contact US</NavLink></li>
    
    
     </>

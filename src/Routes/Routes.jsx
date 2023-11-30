@@ -18,6 +18,7 @@ import UpdateSurvey from "../Pages/Dashboard/MySurvey/UpdateSurvey";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import About from "../Pages/About/About";
+import ContactUs from "../Pages/ContactUs/ContactUs";
 
 
 
@@ -54,6 +55,11 @@ export const router = createBrowserRouter([
             {
                 path: '/about',
                 element: <About></About>,
+            },
+            {
+                path: '/contactUs',
+                element: <ContactUs></ContactUs>,
+               
             }
         
             
@@ -94,6 +100,8 @@ export const router = createBrowserRouter([
         element:  <UpdateSurvey></UpdateSurvey>,
         loader: ({params}) => fetch(`https://kre-survey-server-side.vercel.app/surveyCreation/${params.id}`)
     }
+    
+   
    
    ]
     }
