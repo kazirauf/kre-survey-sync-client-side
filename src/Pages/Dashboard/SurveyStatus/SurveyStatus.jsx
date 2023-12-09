@@ -62,7 +62,7 @@ const SurveyStatus = () => {
   {/* row 1 */}
   {
     surveyCreation.map(u => 
-     <tr key={u._id} className="">
+     <tr key={u?._id} className="">
     
         <td>
           <div className="flex items-center gap-3">
@@ -102,8 +102,8 @@ const SurveyStatus = () => {
    
         
          {
-          u.activity === 'unpublished' || u.activity === 'published'  ?
-          <h1>{u.activity}</h1>
+          u?.activity === 'unpublished' || u?.activity === 'published'  ?
+          <h1>{u?.activity}</h1>
           :
        <>
           <button onClick={() => handlePublish(u)} className="btn btn-sm bg-cyan-500 text-white">Publish</button>
@@ -144,7 +144,7 @@ const SurveyStatus = () => {
             <h2 className="text-center text-xl font-bold">Report</h2>
             
             {u?.allUserReport?.map((report) => (
-              <div key={_id}>
+              <div key={u?._id}>
                 {" "}
                 <div className="chat chat-start">
   <div className="chat-image avatar">

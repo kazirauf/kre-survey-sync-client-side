@@ -9,6 +9,8 @@ Currently, two official plugins are available:
 
 #website-live-link: https://kre-survey-sync.web.app/
 
+#server side repo: https://github.com/kazirauf/kre-survey-sync-server-side
+
 
 Features:
 
@@ -25,3 +27,9 @@ Features:
 6. fameworks and library: tailwind css, material ui, handless ui, daisy ui 
 
 7. Package : Transtack Query, moment
+
+Descriptions :
+
+Kre-Survey-Sync, where you unleash survey prowess, command payments for pro
+users, and dive into influential insights through comments and reports.
+Features
