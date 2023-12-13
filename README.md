@@ -24,9 +24,13 @@ Features:
 
 5. Advanced Security Measures:
 
-6. fameworks and library: tailwind css, material ui, handless ui, daisy ui 
+6. Contact US
 
-7. Package : Transtack Query, moment
+7. Help Center
+
+8. fameworks and library: tailwind css, material ui, handless ui, daisy ui 
+
+9. Package : Transtack Query, moment
 
 Descriptions :
 
